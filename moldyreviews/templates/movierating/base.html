@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<html>
+
+<head>
+<title>Moldy Cheese Movie Reviews</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'moldyreviews/css/movie.css' %}">
+</head>
+</head>
+<body>
+	<div class="page-header text-center">
+		<h2>Moldy Cheese Movie Reviews</h2>
+	</div>
+	<div>
+	<nav class="navbar navbar-inverse">	
+	    <ul class="nav navbar-nav">
+	     <li class="active"><a href="{% url 'home' %}">Home</a></li>
+	     {% if user.is_authenticated %}
+		<li class = "active"><a href = "{% url 'rating_new' %}">Add a review</a></li>
+		<li class = "active"><a href = "{% url 'rating_list'%}">Your reviews</a></li>
+		{% if request.user.is_superuser %}
+		<li class = "active"><a href = "{% url 'report_view'%}">Reports</a></li>
+		{% endif %}	
+		{% endif %}
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	   		{% if user.is_anonymous %}
+	    	<li class="active"><a href="{% url 'signup' %}">Sign up</a></li>
+	    	<li class="active"><a href="{% url 'login' %}">Login</a></li> 
+	    	{% else %}
+	    	<li class="active"><a href="">Welcome {{user}}</a></li>
+	    	<li class="active"><a href = "{% url 'logout' %}">Logout</a></li>
+			{% endif %}
+	    </ul>
+	  	</div>
+	</nav>
+	</div>
+	<div class = "col-md-12">
+		<div class = "l-col col-md-2" id="l-col"></div>
+		<div class = "content col-md-8" id="content-block">
+		{% block content %}
+	    {% endblock %}
+	    </div>
+		<div class = "r-col col-md-2" id="r-col"></div>
+    </div>
+
+	<footer class = "footer navbar-fixed-bottom text-center" >
+		<p> Created by Steven Huang, 2016 </p>
+	</footer>
+</body>
+</html>

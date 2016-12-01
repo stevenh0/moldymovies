@@ -1,0 +1,28 @@
+{% extends 'movierating/base.html' %}
+
+{% block content %}
+	<h1> Click on a movie title to get more information about its statistics </h1>
+	<table class = "table table-bordered">
+		<thead>
+			<th> Movie Name </th>
+			<th> Released </th>
+			<th> User </th>
+			<th> Status </th>
+			<th> Rating </th>
+			<th> Reviewed </th>
+		</thead>
+		<tbody>
+			{% for rating in objs %}
+			<tr>
+				<td> <a href="{% url 'report_detail' pk=rating.pk %}">{{rating.movie_title}} </a></td>
+				<td> {{rating.movie_year}} </td>
+				<td> {{rating.user}} </td>
+				<td> {{rating.movie_status}} </td>
+				<td> {{rating.movie_rating}} </td>
+				<td> {% if rating.movie_review|length > 1 %} Yes {% else %} No {% endif %}</p>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

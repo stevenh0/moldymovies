@@ -1,0 +1,17 @@
+{% extends 'movierating/base.html' %}
+
+{% block content %}
+<div>
+	<h1>Your Reviews</h1>
+</div>
+{% for rating in ratings %}
+	<div class = "col-md-12 review-bar">
+		<h1><a href="{% url 'rating_detail' pk=rating.pk %}"> Movie: {{rating.movie_title}} </a></h1>
+		<p>Released: {{rating.movie_year}} </p>
+		<p> Status: {{rating.movie_status}} </p>
+		<p> Rating: {{rating.movie_rating}} </p>
+		<p> Reviewed: {% if rating.movie_review|length > 1 %} Yes {% else %} No {% endif %}</p>
+	</div>
+{% endfor %}
+
+{% endblock %}

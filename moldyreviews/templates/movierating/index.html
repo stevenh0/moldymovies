@@ -1,0 +1,13 @@
+{% extends 'movierating/base.html' %}
+
+{% block content %}
+	{% for rating in ratings %}
+		<div>
+			<h1> Movie: {{rating.movie_title}} </h1>
+			<p> Released: {{rating.movie_year}} </p>
+			<p> Review: {{rating.movie_review}} </p>
+			<p> Authored by: {{rating.user}} </p>
+			<p> Rating: {{rating.movie_rating}} </p>
+		</div>
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'movierating/base.html' %}
+{% block content %}
+	<p>Report Details</p>
+		<table class = "table table-bordered">
+		<thead>
+			<th> Movie Name </th>
+			<th> Released </th>
+			<th> User </th>
+			<th> Status </th>
+			<th> Rating </th>
+			<th> Reviewed </th>
+		</thead>
+		<tbody>
+			{% for rating in reports %}
+			<tr>
+				<td> {{rating.movie_title}} </td>
+				<td> {{rating.movie_year}} </td>
+				<td> {{rating.user}} </td>
+				<td> {{rating.movie_status}} </td>
+				<td> {{rating.movie_rating}} </td>
+				<td> {% if rating.movie_review|length > 1 %} Yes {% else %} No {% endif %}</p>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<h1>Number of times watched: <span id = "watch_count"> </span></h1>
+	<h1>Average Score: <span id ="score_avg"> </span></h1>
+
+	<script>
+		var count = 0;
+		var score_sum = 0;
+		var score_total = 0;
+		{% for rating in reports %}
+			{% if rating.movie_status == 'Watched' %}
+				count = count+1;
+			{% endif %}
+			{% if rating.movie_rating|length > 0 %}
+				score_sum = score_sum + {{rating.movie_rating}};
+				score_total = score_total + 1;
+			{% endif %}
+			
+		{% endfor %}
+		document.getElementById("watch_count").innerHTML = count;
+		avg = score_sum/score_total
+		document.getElementById("score_avg").innerHTML = avg;
+	</script>
+
+{% endblock %}

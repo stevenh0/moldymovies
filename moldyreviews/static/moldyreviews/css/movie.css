@@ -1,0 +1,32 @@
+.page-header{
+	background-color: #FFFF33;
+    margin-top: 0;
+    margin-bottom: 0px;
+    padding: 20px 20px 20px 40px;
+    font-family:Impact;
+}
+
+#content-block{
+	padding-bottom:40px;
+}
+
+.review-bar{
+	background-color: #FFFF33;
+}
+
+.navbar-nav > li{
+  padding-left:60px;
+  padding-right:60px;
+}
+
+.footer{
+	background-color: black;
+}
+
+img{
+	max-width:100% height:auto;
+}
+
+h1{
+	font-family:Tahoma;
+}
