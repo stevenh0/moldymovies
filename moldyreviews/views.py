@@ -37,7 +37,8 @@ def home_site(request):
 
 def rating_detail(request, pk):
 	rating = get_object_or_404(Rating, pk=pk)
-	httprequest = Request('http://www.omdbapi.com/?t=' + rating.movie_title + '&plot=full')
+	formattedTitle = rating.movie_title.replace(' ', '+')
+	httprequest = Request('http://www.omdbapi.com/?t=' + formattedTitle + '&y=' + rating.movie_year + '&plot=full')
 	try:
 		response = urlopen(httprequest)
 		encoding = response.info().get_content_charset('utf-8')
@@ -45,7 +46,6 @@ def rating_detail(request, pk):
 		movie_json = json.loads(movie_data.decode(encoding))
 		if(movie_json["Response"]=="False"):
 			movie_json = {'Poster':"N/A", 'Rated':'N/A', 'imbdRating':'N/A', 'Plot':'Movie not found'}
-
 	except Exception:
 		print("something went wrong")
 	return render(request, 'movierating/rating_detail.html', {'rating': rating, 'movie_data':movie_json})
